@@ -38,7 +38,7 @@ p.date {
 }
 .container {
   display: block;
-  margin: 50px auto;
+  margin-top: 50px;
   width: min-content;
   padding: 80px;
   background-color: rgb(209, 240, 238);
@@ -58,10 +58,16 @@ button#location {
   padding: 10px;
 }
 p.userCity,
-span#emoji,
 span#temp {
   color: black;
 }
-span#emoji {
-  font-size: 60px;
+div.coder {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+a {
+  color: white;
 }
