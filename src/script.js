@@ -36,12 +36,24 @@ let form = document.querySelector("#searchCity");
 form.addEventListener("submit", enterCity);
 
 function showWeather(response) {
+  console.log(response);
   let temp = document.querySelector("span#temp");
   temp.innerHTML = `Currently 
   ${Math.round(response.data.main.temp)}℃`;
 
   let h1City = document.querySelector("p.userCity");
   h1City.innerHTML = response.data.name;
+
+  let feels = document.querySelector("div#feels.col");
+  feels.innerHTML = `Feels like ${Math.round(
+    response.data.main.feels_like
+  )}℃`;
+
+  let humidity = document.querySelector("div#humidity.col");
+  humidity.innerHTML = `Humidity ${response.data.main.humidity}%`;
+
+  let wind = document.querySelector("div#wind.col");
+  wind.innerHTML = `Wind speed ${Math.round(response.data.wind.speed)}km/h`;
 
   let weatherIcon = document.querySelector("#icon");
   let iconCode = response.data.weather[0].icon;
