@@ -23,6 +23,14 @@ if (minutes < 10) {
 
 p.innerHTML = `${day}, ${hour}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function enterCity(event) {
   event.preventDefault();
   let apiKey = "fda3688b1db05987dd5d07c237aecfba";
@@ -37,17 +45,16 @@ form.addEventListener("submit", enterCity);
 
 function showWeather(response) {
   console.log(response);
-  let temp = document.querySelector("span#temp");
-  temp.innerHTML = `Currently 
-  ${Math.round(response.data.main.temp)}℃`;
+  let temp = document.querySelector("strong#temp");
+  let celsius = document.querySelector("span#celsius/fahrenheit");
+  celsius.innerHTML = "℃";
+  temp.innerHTML = Math.round(response.data.main.temp).celsius;
 
   let h1City = document.querySelector("p.userCity");
   h1City.innerHTML = response.data.name;
 
   let feels = document.querySelector("div#feels.col");
-  feels.innerHTML = `Feels like ${Math.round(
-    response.data.main.feels_like
-  )}℃`;
+  feels.innerHTML = `Feels like ${Math.round(response.data.main.feels_like)}℃`;
 
   let humidity = document.querySelector("div#humidity.col");
   humidity.innerHTML = `Humidity ${response.data.main.humidity}%`;
@@ -60,7 +67,6 @@ function showWeather(response) {
   let iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   $(weatherIcon).attr("src", iconUrl);
 }
-
 let currentLocation = document.querySelector("button#location");
 currentLocation.addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition((position) => {
