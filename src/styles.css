@@ -59,7 +59,8 @@ button#location {
   padding: 10px;
 }
 p.userCity,
-span#temp {
+span#temp,
+span.units {
   color: black;
 }
 div.coder {
@@ -83,4 +84,7 @@ div#feels.col,
 div#wind.col,
 div#humidity.col {
   margin: 15px;
+}
+span.units {
+  display: none;
 }
