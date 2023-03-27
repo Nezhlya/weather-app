@@ -33,7 +33,7 @@ function enterCity(event) {
   axios.get(apiUrl).then(showWeather);
 }
 let form = document.querySelector("#searchCity");
-form.addEventListener("submit", enterCity, hideFunction);
+form.addEventListener("submit", enterCity);
 
 function showWeather(response) {
   console.log(response);
@@ -51,7 +51,8 @@ function showWeather(response) {
   h1City.innerHTML = response.data.name;
 
   let feels = document.querySelector("div#feels.col");
-  feels.innerHTML = `Feels like ${Math.round(response.data.main.feels_like)}`;
+  let tempFeels = response.data.main.feels_like;
+  feels.innerHTML = `Feels like ${Math.round(tempFeels)}<sup>℃</sup>`;
 
   let humidity = document.querySelector("div#humidity.col");
   humidity.innerHTML = `Humidity ${response.data.main.humidity}%`;
@@ -68,23 +69,19 @@ function showWeather(response) {
     event.preventDefault();
     let temp = document.querySelector("span#temp");
     temp.innerHTML = Math.round(celsius);
+    let feels = document.querySelector("div#feels.col");
+    feels.innerHTML = `Feels like ${Math.round(tempFeels)}<sup>℃</sup>`;
   }
+  $("span.units").show();
 }
 function toTempFahr(event) {
   event.preventDefault();
   let temp = document.querySelector("span#temp");
   let fahrenheit = (temp.innerHTML * 9) / 5 + 32;
-
-  document.querySelector("span#temp").innerHTML = Math.round(fahrenheit);
-}
-
-function hideFunction() {
-  let units = document.querySelector("span.units");
-  if (units.style.display === "none") {
-    units.style.display = "inline";
-  } else {
-    units.style.display = "none";
-  }
+  let feels = document.querySelector("div#feels.col");
+  let feelsFahrenheit = (feels.innerHTML * 9) / 5 + 32;
+  feels.innerHTML = `Feels like ${Math.round(feelsFahrenheit)}<sup>℉</sup>`;
+  temp.innerHTML = Math.round(fahrenheit);
 }
 
 let currentLocation = document.querySelector("button#location");
@@ -96,5 +93,4 @@ currentLocation.addEventListener("click", () => {
     apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
     axios.get(apiUrl).then(showWeather);
   });
-  hideFunction;
 });

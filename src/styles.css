@@ -84,7 +84,13 @@ div#feels.col,
 div#wind.col,
 div#humidity.col {
   margin: 15px;
+  display: block;
 }
+
 span.units {
-  display: none;
+  display: inline-block;
+  font-size: 20px;
+}
+span.units:hover {
+  cursor: pointer;
 }
