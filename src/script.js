@@ -50,10 +50,6 @@ function showWeather(response) {
   let h1City = document.querySelector("p.userCity");
   h1City.innerHTML = response.data.name;
 
-  let feels = document.querySelector("div#feels.col");
-  let tempFeels = response.data.main.feels_like;
-  feels.innerHTML = `Feels like ${Math.round(tempFeels)}<sup>℃</sup>`;
-
   let humidity = document.querySelector("div#humidity.col");
   humidity.innerHTML = `Humidity ${response.data.main.humidity}%`;
 
@@ -69,8 +65,6 @@ function showWeather(response) {
     event.preventDefault();
     let temp = document.querySelector("span#temp");
     temp.innerHTML = Math.round(celsius);
-    let feels = document.querySelector("div#feels.col");
-    feels.innerHTML = `Feels like ${Math.round(tempFeels)}<sup>℃</sup>`;
   }
   $("span.units").show();
 }
@@ -78,9 +72,6 @@ function toTempFahr(event) {
   event.preventDefault();
   let temp = document.querySelector("span#temp");
   let fahrenheit = (temp.innerHTML * 9) / 5 + 32;
-  let feels = document.querySelector("div#feels.col");
-  let feelsFahrenheit = (feels.innerHTML * 9) / 5 + 32;
-  feels.innerHTML = `Feels like ${Math.round(feelsFahrenheit)}<sup>℉</sup>`;
   temp.innerHTML = Math.round(fahrenheit);
 }
 
